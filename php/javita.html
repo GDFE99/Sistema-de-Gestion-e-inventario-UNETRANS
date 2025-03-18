@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#nombre').on('input', function() {
+                var nombre = $(this).val();
+                nombre = nombre.charAt(0).toUpperCase() + nombre.slice(1);
+                $(this).val(nombre);
+            });
+        });
+    </script>
+</head>
+<body>
+    <form method="POST" action="procesar.php">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="usuario_nombre" required>
+        <!-- Resto de los campos del formulario -->
+        <input type="submit" value="Enviar">
+        
+    </form>
+</body>
+</html>
+// Guardar las preguntas seleccionadas
+let pregunta1Select = document.querySelector('select[name="pregunta1"]');
+let pregunta2Select = document.querySelector('select[name="pregunta2"]');
+
+pregunta1Select.addEventListener('change', () => {
+    // Al seleccionar una pregunta en el primer menú, deshabilitarla en el segundo menú
+    let preguntaSeleccionada = pregunta1Select.value;
+    pregunta2Select.querySelectorAll('option').forEach(option => {
+        option.disabled = (option.value === preguntaSeleccionada);
+    });
+});
+
+pregunta2Select.addEventListener('change', () => {
+    // Al seleccionar una pregunta en el segundo menú, deshabilitarla en el primer menú
+    let preguntaSeleccionada = pregunta2Select.value;
+    pregunta1Select.querySelectorAll('option').forEach(option => {
+        option.disabled = (option.value === preguntaSeleccionada);
+    });
+});
+
